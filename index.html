@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>YBM 중2 Lesson 8 본문 영작 테스트 · 리드림영어학원</title>
+<style>
+  :root{
+    --bg:#eef4ee; --card:#ffffff; --ink:#12291d; --muted:#5c7566;
+    --green:#2f9e5f; --green-d:#248049; --green-deep:#1c5c36; --green-l:#e4f3ea;
+    --line:#d4e4d8; --amber:#e8a23b; --red:#d9534f; --red-l:#fbe9e8;
+    --chip:#f3f8f4; --shadow:0 2px 10px rgba(24,80,48,.08);
+    --r:14px; --rs:10px;
+  }
+  *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;}
+  html,body{margin:0;padding:0;}
+  body{
+    font-family:'Pretendard','Apple SD Gothic Neo','Malgun Gothic',system-ui,sans-serif;
+    background:var(--bg); color:var(--ink); line-height:1.5;
+    min-height:100vh; padding:16px; display:flex; justify-content:center;
+  }
+  .wrap{width:100%; max-width:640px;}
+  .re-logo{display:flex;align-items:center;gap:7px;font-weight:800;font-size:13px;color:var(--green-deep);letter-spacing:.3px;margin-bottom:14px;}
+  .re-logo b{background:var(--green);color:#fff;padding:2px 7px;border-radius:6px;font-size:12px;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow);}
+  .btn{font-family:inherit;font-weight:800;border:none;border-radius:var(--rs);cursor:pointer;transition:background .15s,transform .1s,opacity .15s;}
+  .btn:active{transform:scale(.98);}
+  .btn-primary{background:var(--green);color:#fff;}
+  .btn-primary:hover{background:var(--green-d);}
+  .btn-primary:disabled{opacity:.4;cursor:not-allowed;}
+  .btn-ghost{background:var(--card);color:var(--green-deep);border:1.5px solid var(--green);}
+  .btn-ghost:hover{background:var(--green-l);}
+
+  /* 인트로 */
+  .intro{padding:24px 20px 22px;}
+  .intro .top{text-align:center;margin-bottom:18px;}
+  .intro .emoji{font-size:40px;}
+  .intro h1{font-size:19px;margin:4px 0 4px;letter-spacing:-.4px;}
+  .intro .sub{color:var(--muted);font-size:13px;margin:0;word-break:keep-all;}
+  .sec-title{font-size:13px;font-weight:800;color:var(--green-deep);margin:0 0 9px;}
+  .quick{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap;}
+  .quick button{flex:1;min-width:50px;padding:8px 4px;font-size:12px;font-weight:800;font-family:inherit;border:1.5px solid var(--line);background:var(--card);color:var(--muted);border-radius:8px;cursor:pointer;}
+  .quick button:hover{border-color:var(--green);color:var(--green-deep);}
+  .range-group{margin-bottom:12px;}
+  .range-lbl{font-size:11.5px;font-weight:800;color:var(--muted);margin-bottom:6px;}
+  .chips-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(54px,1fr));gap:6px;}
+  .rchip{padding:9px 4px;font-size:12.5px;font-weight:800;font-family:inherit;border:1.5px solid var(--line);background:var(--card);color:var(--muted);border-radius:8px;cursor:pointer;transition:all .13s;}
+  .rchip:hover{border-color:var(--green);}
+  .rchip.on{background:var(--green);border-color:var(--green);color:#fff;}
+  .stat-row{display:flex;gap:9px;margin:14px 0 4px;}
+  .stat{flex:1;background:var(--green-l);border-radius:var(--rs);padding:11px;text-align:center;}
+  .stat .n{font-size:20px;font-weight:900;color:var(--green-deep);}
+  .stat .l{font-size:11px;font-weight:700;color:var(--muted);margin-top:1px;}
+  .timer-info{display:flex;align-items:center;gap:9px;background:#fafdfb;border:1px solid var(--line);border-radius:var(--rs);padding:11px 13px;margin-top:10px;}
+  .timer-info .ti-ico{font-size:17px;}
+  .timer-info .t-lbl{font-size:13px;font-weight:800;}
+  .timer-info .t-desc{font-size:11.5px;color:var(--muted);font-weight:600;margin-top:1px;}
+  .start-btn{width:100%;padding:15px;font-size:16px;margin-top:14px;}
+  .rule{font-size:11.5px;color:var(--muted);line-height:1.75;margin-top:14px;background:#fafdfb;border:1px solid var(--line);border-radius:var(--rs);padding:11px 13px;}
+  .rule b{color:var(--green-deep);}
+
+  /* 상단바 */
+  .topbar{display:flex;align-items:center;gap:12px;margin-bottom:14px;}
+  .quiz-title{font-weight:800;font-size:14.5px;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+  .exit-btn{background:none;border:none;color:var(--muted);font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;padding:4px 6px;}
+  .progress-wrap{height:7px;background:var(--line);border-radius:99px;overflow:hidden;margin-bottom:4px;}
+  .progress-bar{height:100%;background:var(--green);border-radius:99px;transition:width .3s;}
+  .progress-meta{display:flex;justify-content:space-between;font-size:12px;color:var(--muted);font-weight:700;margin-bottom:14px;}
+
+  /* 타이머 */
+  .timer-row{display:flex;align-items:center;gap:10px;margin-bottom:14px;position:relative;}
+  .timer-wrap{flex:1;height:9px;background:var(--line);border-radius:99px;overflow:hidden;}
+  .timer-bar{height:100%;background:var(--green);border-radius:99px;transition:width 1s linear,background .3s;}
+  .timer-bar.low{background:var(--red);}
+  .timer-val{flex-shrink:0;font-size:13px;font-weight:800;color:var(--green-deep);min-width:38px;text-align:right;}
+  .timer-val.low{color:var(--red);}
+  .penalty-pop{position:absolute;right:0;top:-16px;font-size:13px;font-weight:900;color:var(--red);animation:popUp .7s ease-out forwards;pointer-events:none;}
+  @keyframes popUp{0%{opacity:0;transform:translateY(4px);}20%{opacity:1;transform:translateY(-2px);}100%{opacity:0;transform:translateY(-14px);}}
+
+  /* 문항 */
+  .q-card{padding:20px 18px 22px;}
+  .q-num{font-size:12px;font-weight:800;color:var(--green);letter-spacing:.5px;margin-bottom:10px;display:flex;align-items:center;gap:7px;}
+  .tbadge{border-radius:6px;padding:2px 8px;font-size:11px;font-weight:900;color:#fff;background:#c964a0;}
+  .q-ko{font-size:16.5px;font-weight:700;line-height:1.65;margin-bottom:6px;letter-spacing:-.2px;word-break:keep-all;}
+  .q-instr{font-size:12.5px;color:var(--muted);margin-bottom:13px;}
+
+  /* 문장 틀 (주어진 부분 + 빈칸) */
+  .frame{
+    border:2px dashed var(--line);border-radius:var(--rs);background:#fafdfb;
+    padding:11px 13px;margin-bottom:14px;
+    font-size:16px;line-height:2.3;color:var(--ink);
+    word-break:keep-all;overflow-wrap:break-word;transition:border-color .2s,background .2s;
+  }
+  .frame .fx{color:#6b8576;font-weight:600;}
+  .frame .nb{white-space:nowrap;}
+  .slot{
+    display:inline-block;vertical-align:middle;min-width:46px;height:31px;line-height:27px;padding:0 9px;margin:3px 0;
+    border:1.5px dashed #b8cdbf;border-radius:8px;background:#fff;
+    font-size:15px;font-weight:800;text-align:center;color:var(--green-deep);
+  }
+  .slot.fill{border-style:solid;border-color:var(--green);background:var(--green-l);}
+  .slot.cur{border:2px solid var(--green);animation:curPulse 1.2s ease-in-out infinite;}
+  @keyframes curPulse{0%,100%{box-shadow:0 0 0 2px rgba(47,158,95,.12);}50%{box-shadow:0 0 0 5px rgba(47,158,95,.26);}}
+  .slot.miss{border:1.5px solid var(--red);background:var(--red-l);color:var(--red);}
+  .frame.ok{border-style:solid;border-color:var(--green);}
+  .frame.ok .slot.fill{background:var(--green);color:#fff;}
+  .frame.ng{border-style:solid;border-color:var(--red);}
+
+  /* 보기 */
+  .bank{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px;min-height:20px;}
+  .bank.done .chip{opacity:.35;cursor:default;}
+  .bank.done .chip.used{display:none;}
+  .chip{
+    font-family:inherit;font-size:14.5px;font-weight:700;padding:9px 13px;border-radius:10px;
+    border:1.5px solid var(--line);background:var(--chip);color:var(--ink);cursor:pointer;
+    transition:transform .1s,background .15s,opacity .15s,border-color .15s;user-select:none;
+  }
+  .chip:hover{background:#e9f2ec;}
+  .chip:active{transform:scale(.94);}
+  .chip.used{opacity:0;pointer-events:none;transform:scale(.6);}
+  .chip.wrong-tap{animation:shake .4s;border-color:var(--red)!important;background:var(--red-l)!important;color:var(--red)!important;}
+  @keyframes shake{0%,100%{transform:translateX(0);}20%{transform:translateX(-6px);}40%{transform:translateX(6px);}60%{transform:translateX(-4px);}80%{transform:translateX(4px);}}
+
+  .q-actions{display:flex;gap:9px;}
+  .q-actions .btn{padding:13px;font-size:14.5px;flex:1;}
+
+  .verdict{margin-bottom:14px;padding:12px 14px;border-radius:var(--rs);font-size:14px;font-weight:700;}
+  .verdict.ok{background:var(--green-l);color:var(--green-deep);}
+  .verdict.ng{background:var(--red-l);color:var(--red);}
+  .verdict .v-sub{margin-left:8px;font-size:12px;font-weight:700;color:var(--muted);}
+
+  /* 결과 */
+  .result{padding:26px 20px 24px;text-align:center;}
+  .result .emoji{font-size:46px;margin-bottom:6px;}
+  .result .score{font-size:38px;font-weight:900;letter-spacing:-1px;}
+  .result .score.pass{color:var(--green);}
+  .result .score.mid{color:var(--amber);}
+  .result .pct{color:var(--muted);font-weight:700;margin:2px 0 6px;}
+  .sum-box{text-align:left;background:#fafdfb;border:1.5px solid var(--line);border-radius:var(--rs);padding:12px 14px;margin:14px 0 2px;}
+  .sum-row{display:flex;gap:10px;align-items:flex-start;}
+  .sum-row + .sum-row{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);}
+  .sum-lbl{flex-shrink:0;width:58px;font-size:12px;font-weight:800;color:var(--muted);padding-top:3px;}
+  .sum-val{font-size:14.5px;font-weight:900;color:var(--green-deep);word-break:keep-all;line-height:1.5;}
+  .sum-sub{font-size:12px;font-weight:700;color:var(--muted);}
+  .sum-val.nums{display:flex;flex-wrap:wrap;gap:6px;}
+  .num-chip{font-family:inherit;font-size:12.5px;font-weight:800;padding:4px 10px;border-radius:99px;border:1.5px solid;cursor:pointer;}
+  .num-chip.ok{background:var(--green-l);border-color:var(--green);color:var(--green-deep);}
+  .num-chip.ng{background:var(--red-l);border-color:var(--red);color:var(--red);}
+  .review-item.flash{animation:riFlash 1.3s ease-out;}
+  @keyframes riFlash{0%,100%{box-shadow:0 0 0 0 rgba(47,158,95,0);}25%{box-shadow:0 0 0 4px rgba(47,158,95,.35);}}
+  .review{text-align:left;margin:16px 0 6px;}
+  .review-item{border:1px solid var(--line);border-radius:var(--rs);padding:12px 14px;margin-bottom:9px;background:#fafdfb;}
+  .ri-top{display:flex;align-items:flex-start;gap:8px;font-size:13px;margin-bottom:6px;}
+  .ri-mark{flex-shrink:0;width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:#fff;margin-top:1px;}
+  .ri-mark.ok{background:var(--green);}
+  .ri-mark.ng{background:var(--red);}
+  .ri-ko{font-weight:700;color:var(--ink);word-break:keep-all;}
+  .ri-no{color:var(--green);font-weight:900;margin-right:3px;}
+  .ri-ans{font-size:13.5px;color:#6b8576;line-height:1.6;margin-left:28px;}
+  .ri-ans b{color:var(--green-deep);font-weight:800;}
+  .ri-meta{font-size:12px;color:var(--red);font-weight:700;margin-left:28px;margin-top:4px;}
+  .ri-meta.soft{color:var(--muted);}
+  .result .row{display:flex;gap:9px;margin-top:18px;}
+  .result .btn{padding:13px;font-size:14.5px;flex:1;}
+  .re-foot{text-align:center;font-size:11.5px;color:var(--muted);margin-top:16px;font-weight:700;letter-spacing:.3px;}
+  .re-foot b{color:var(--green-deep);}
+
+  @media (max-width:420px){
+    body{padding:12px;}
+    .q-card{padding:18px 14px 20px;}
+    .frame{font-size:15.5px;padding:10px 11px;}
+    .slot{min-width:40px;padding:0 7px;font-size:14.5px;}
+    .chip{font-size:14px;padding:8px 11px;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="re-logo"><b>RE:</b> 리드림영어학원 · 영작 테스트</div>
+  <div id="app"></div>
+</div>
+
+<script>
+/* ================================================================
+   YBM(김은형) 중2 Lesson 8 본문 영작 테스트
+   워크북 8 순서배열 1~24번 · 한글 뜻 → 빈칸 단어 순서대로 배열
+   en 의 [ ] 부분이 학생이 배열할 단어, 나머지는 주어진 부분
+   ================================================================ */
+
+const TITLE = 'Lesson 8 본문 영작 테스트';
+
+const POOL = [
+  { no:1,
+    ko:"Frigga라는 부유한 노부인이 큰 성에 살고 있었어요. 그녀는 거대한 다이아몬드를 금고에 보관하고 있었죠.",
+    en:"[A rich old lady named Frigga lived in a big castle]. [She kept her giant diamond in a safe]." },
+  { no:2,
+    ko:"어느 날, 그녀가 나에게 전화를 걸어 말했어요. “Lily Holmes, 내 다이아몬드가 없어졌어요! 와서 이 미스터리를 해결해 줘요. 당신은 마을 최고의 탐정이잖아요!”",
+    en:"One day, [she called me and said], “Lily Holmes, [my diamond is missing]! Please [come and solve this mystery]. [You’re the best detective in town]!”" },
+  { no:3,
+    ko:"나는 그녀의 집으로 달려갔어요. 내가 도착하자, Frigga는 나에게 자신의 방을 보여 줬어요. 나는 빠르게 몇 가지 단서를 찾고 메모를 했어요.",
+    en:"[I ran to her house]. When I arrived, [Frigga showed me her room]. [I quickly found some clues and made a note]." },
+  { no:4,
+    ko:"단서는 부러진 빨간 가짜 손톱, 공기 중에 나는 남자 비누 냄새, 그리고 그녀의 책상 위에 남은 더러운 발자국이었어요.",
+    en:"[The clues were a broken red fake nail], [the smell of men’s soap in the air], [and dirty footprints on her desk]." },
+  { no:5,
+    ko:"“다이아몬드가 없어졌다는 걸 언제 알았어요?” 내가 물었어요. “오늘 오후에요,” Frigga는 대답했어요.",
+    en:"“[When did you find out the diamond was missing]?” I asked. “This afternoon,” Frigga said." },
+  { no:6,
+    ko:"“아침에 금고를 확인하고 열쇠를 탁자 아래에 숨겼어요.",
+    en:"“[I checked my safe in the morning] [and hid the key under the table]." },
+  { no:7,
+    ko:"그다음에, 가정부가 내 방으로 청소하러 들어오는 걸 봤어요. 오후에 다시 돌아왔을 때, 내 방에서 발소리가 들렸어요.",
+    en:"Then, [I saw my maid come into my room to clean]. [When I came back in the afternoon], [I heard footsteps in my room]." },
+  { no:8,
+    ko:"나는 문으로 달려갔고 도둑이 열린 창문을 통해 도망치는 걸 봤어요. 얼굴은 볼 수 없었어요.",
+    en:"[I ran to the door] and [saw the thief escaping through the open window]. [I couldn’t see the face]." },
+  { no:9,
+    ko:"그리고 금고가 열려 있고, 내 다이아몬드가 없어졌다는 걸 알게 되었어요! 너무 놀라서 비명을 질렀죠.”",
+    en:"Then, [I found that my safe was open], and [my diamond was gone]! [I was so surprised that I screamed].”" },
+  { no:10,
+    ko:"“그때 집에 다른 사람이 있었나요?” “이 성에는 많은 사람들이 살아요. 곧 다들 올 거예요.”",
+    en:"“[Do you know who else was in the house] at the time?” “[Many people live in this castle]. [They will be here soon].”" },
+  { no:11,
+    ko:"가정부 Amy는 슬리퍼를 신고 있었고, Frigga와 같은 빨간색 매니큐어를 하고 있었어요.",
+    en:"Amy, the maid, [wore slippers and had red nails like Frigga’s]." },
+  { no:12,
+    ko:"“나는 아침에 Frigga의 방을 청소했어요. 끝낸 후에는 창문을 닫고 정원사가 밖에서 일하는 걸 봤어요.",
+    en:"“[I cleaned Frigga’s room] in the morning. After I finished, [I closed the windows and saw the gardener working outside]." },
+  { no:13,
+    ko:"그때는 오전 11시였어요. 그 후에는 오후 내내 지하실에서 빨래를 했어요.”",
+    en:"It was 11 a.m. Then, I [did laundry in the basement all afternoon].”" },
+  { no:14,
+    ko:"그다음으로, 나는 Frigga의 비서 Jessica와 이야기를 나누었어요. 그녀는 빨간 하이힐을 신고 있었어요.",
+    en:"Next, I spoke with Jessica, Frigga’s assistant. [She was wearing red high heels]." },
+  { no:15,
+    ko:"“저는 Frigga의 일정, 우편물, 그리고 고지서를 관리해요. 하루 종일 거실에서 고지서를 확인하고 있었어요.” “오늘 오후에 Amy가 어디 있었는지 아세요?” 내가 물었어요.",
+    en:"“[I manage her schedule, mail, and bills]. All day long, [I was checking bills] in the living room.” “[Do you know where Amy was this afternoon]?” I asked." },
+  { no:16,
+    ko:"“Amy가 빨래를 가지고 지하실로 내려가는 걸 봤어요. 그리고 오후 내내 돌아오지 않았어요.",
+    en:"“[I saw Amy go to the basement with the laundry], and [she didn’t come back all afternoon]." },
+  { no:17,
+    ko:"또한, Frigga가 돌아오기 전에 Frigga의 방에 들어가거나 나온 사람을 본 적이 없어요.”",
+    en:"Also, [I didn’t see anyone go into or come out of Frigga’s room] [before Frigga returned].”" },
+  { no:18,
+    ko:"Frigga의 사촌인 John은 작년에 직장과 집을 잃은 후 Frigga의 집으로 이사했어요. 그는 남성용 신발을 신고 있었어요.",
+    en:"John, Frigga’s cousin, [moved into her house last year] [after he lost his job and home]. [He was wearing men’s shoes]." },
+  { no:19,
+    ko:"“나는 오후 내내 내 방에서 책을 읽었어요. 하지만 나는 매시간마다 손을 비누로 씻기 때문에 계속 화장실을 왔다 갔다 했어요.",
+    en:"“[I read books in my room] all afternoon. But, [I kept going back and forth to the bathroom] [because I wash my hands with soap] every hour." },
+  { no:20,
+    ko:"그럴 때마다 Jessica가 거실에서 일하는 걸 봤어요. Frigga가 비명을 지르는 걸 들었을 때, 나는 그녀의 방으로 달려갔어요. 창문이 열려 있었고, Frigga가 겁먹은 표정으로 있는 걸 봤어요.”",
+    en:"Each time, [I saw Jessica working in the living room]. [When I heard Frigga scream], [I ran to her room]. [I found the window open] and [saw Frigga looking afraid].”" },
+  { no:21,
+    ko:"마지막 사람은 정원사인 Nick이었어요. 그는 운동화를 신고 있었어요.",
+    en:"[The last person was Nick], the gardener. [He was wearing sneakers]." },
+  { no:22,
+    ko:"“오늘 오후에 정원에서 일을 시작했어요. Frigga의 닫힌 창문 근처에서 나무를 다듬고 있을 때, 나는 낯선 사람이 그녀의 방에서 나오는 걸 봤어요.",
+    en:"“[I started working in the garden] this afternoon. [As I shaped the trees near Frigga’s closed windows], [I saw a stranger leaving her room]." },
+  { no:23,
+    ko:"얼굴은 볼 수 없었어요. 이상했지만, 이 성에는 많은 사람들이 있어서 별로 신경 쓰지 않았어요.”",
+    en:"[I couldn’t see the face]. It was strange, but [I didn’t think much of it] [because there are many people in this castle].”" },
+  { no:24,
+    ko:"단서들을 통해, 나는 한 사람이 거짓말을 하고 있다는 것을 알게 되었어요! 나는 모두를 거실로 모은 후 말했어요. “도둑은 바로 당신이에요!”",
+    en:"With the clues, [I found that one person was lying]! [I gathered everyone in the living room and said], “The thief is you!”" },
+];
+
+// 범위 선택 묶음 (워크북 쪽 기준)
+const GROUPS = [
+  { label:'워크북 1쪽', from:1,  to:8  },
+  { label:'워크북 2쪽', from:9,  to:17 },
+  { label:'워크북 3쪽', from:18, to:24 }
+];
+
+/* ================== 설정 ================== */
+const PICK_COUNT           = 5;    // 랜덤 출제 문항 수
+const SEC_PER_WORD         = 2.6;  // 단어당 제한시간(초)
+const PENALTY_PER_WRONG    = 1;    // 문항 오답 1개당 이후 문항 차감(초)
+const WRONG_TAP_PENALTY    = 2;    // 잘못 누를 때마다 즉시 차감(초)
+const MIN_LIMIT            = 3;    // 최소 제한시간(초)
+const DISTRACTOR_ITEMS     = 1;    // 보기에 섞을 다른 문항의 문장(괄호 묶음) 수
+const DISTRACTOR_MIN_WORDS = 5;    // 섞을 문장은 5단어 이상에서 고름
+const MAX_BANK             = 36;   // 보기 칩 최대 개수
+
+/* ================== 문항 준비 ================== */
+function parseItem(item){
+  const segs = [], words = [], chunks = [];
+  const re = /\[([^\]]+)\]/g;
+  let last = 0, m;
+  while((m = re.exec(item.en)) !== null){
+    if(m.index > last) segs.push({ t:item.en.slice(last, m.index) });
+    const ws = m[1].trim().split(/\s+/);
+    segs.push({ c:ws.map(function(w, i){ return words.length + i; }) });
+    ws.forEach(function(w){ words.push(w); });
+    chunks.push(ws);
+    last = re.lastIndex;
+  }
+  if(last < item.en.length) segs.push({ t:item.en.slice(last) });
+  return { segs:segs, words:words, chunks:chunks, full:item.en.replace(/[\[\]]/g, '') };
+}
+const PARSED = {};
+const ALL_CHUNKS = [];
+POOL.forEach(function(p){
+  PARSED[p.no] = parseItem(p);
+  PARSED[p.no].chunks.forEach(function(ws){ ALL_CHUNKS.push({ no:p.no, words:ws }); });
+});
+
+/* ================== 상태 ================== */
+let selected = new Set(POOL.map(function(p){ return p.no; }));   // 처음엔 전체 선택
+let QUESTIONS = [];
+let testRange = [];   // 시험 시작할 때 고른 범위(번호 목록) — 결과 화면에 표시
+let screen = 'intro';
+let idx = 0;
+let placed = [];
+let bank = [], bankUsed = [];
+let graded = false;
+let results = [];
+let wrongCount = 0;
+let timerId = null, timeLeft = 0, timeTotal = 0;
+
+const app = document.getElementById('app');
+
+/* ================== 유틸 ================== */
+const PUNCT = /^[.,!?;:'"“”‘’]+|[.,!?;:'"“”‘’]+$/g;
+function strip(w){ return String(w).replace(PUNCT, ''); }
+function norm(w){ return strip(w).toLowerCase().replace(/'/g, '’'); }
+// 보기 칩은 워크북처럼: 구두점 없이, 문장 첫 글자도 소문자 (고유명사·I 제외)
+const PROPER = new Set(['i','frigga','frigga’s','amy','jessica','nick','john','lily','holmes']);
+function chipText(w){
+  const s = strip(w);
+  if(PROPER.has(s.toLowerCase())) return s;
+  return s.charAt(0).toLowerCase() + s.slice(1);
+}
+function shuffle(a){ const b=a.slice(); for(let i=b.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [b[i],b[j]]=[b[j],b[i]]; } return b; }
+function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+// [1,2,3,5,9,10] → "1~3, 5, 9~10번"
+function rangeText(nums){
+  const a = nums.slice().sort(function(x, y){ return x - y; });
+  const out = [];
+  for(let i = 0; i < a.length; ){
+    let j = i;
+    while(j + 1 < a.length && a[j+1] === a[j] + 1) j++;
+    out.push(j > i ? a[i] + '~' + a[j] : String(a[i]));
+    i = j + 1;
+  }
+  return out.join(', ') + '번';
+}
+
+/* ================== 타이머 ================== */
+function computeLimit(words){
+  const base = Math.round(words.length * SEC_PER_WORD);
+  return Math.max(MIN_LIMIT, base - wrongCount * PENALTY_PER_WRONG);
+}
+function startTimer(words){
+  stopTimer();
+  timeTotal = computeLimit(words);
+  timeLeft = timeTotal;
+  timerId = setInterval(function(){
+    timeLeft--;
+    updateTimerUI();
+    if(timeLeft <= 0){ stopTimer(); timeUp(); }
+  }, 1000);
+}
+function stopTimer(){ if(timerId){ clearInterval(timerId); timerId = null; } }
+function updateTimerUI(){
+  const bar = document.getElementById('timer-bar'), val = document.getElementById('timer-val');
+  if(!bar || !val) return;
+  bar.style.width = Math.max(0, timeLeft / timeTotal * 100) + '%';
+  val.textContent = Math.max(0, timeLeft) + '초';
+  bar.classList.toggle('low', timeLeft <= 5);
+  val.classList.toggle('low', timeLeft <= 5);
+}
+function penalizeWrongTap(el){
+  if(graded) return;
+  el.classList.remove('wrong-tap'); void el.offsetWidth; el.classList.add('wrong-tap');
+  setTimeout(function(){ el.classList.remove('wrong-tap'); }, 400);
+  results[idx].taps++;
+  timeLeft -= WRONG_TAP_PENALTY;
+  flashPenalty();
+  updateTimerUI();
+  if(timeLeft <= 0){ timeLeft = 0; updateTimerUI(); stopTimer(); timeUp(); }
+}
+function flashPenalty(){
+  const val = document.getElementById('timer-val');
+  if(!val || !val.parentElement) return;
+  const pop = document.createElement('span');
+  pop.className = 'penalty-pop';
+  pop.textContent = '-' + WRONG_TAP_PENALTY + '초';
+  val.parentElement.appendChild(pop);
+  setTimeout(function(){ pop.remove(); }, 700);
+}
+function timeUp(){
+  if(graded) return;
+  const r = results[idx];
+  r.correct = false;
+  r.timeout = true;
+  r.filled = placed.length;
+  wrongCount++;
+  graded = true;
+  renderQuiz();
+}
+
+/* ================== 렌더 ================== */
+function render(){
+  if(screen === 'intro') renderIntro();
+  else if(screen === 'quiz') renderQuiz();
+  else renderResult();
+}
+
+/* ---------- 인트로 ---------- */
+function renderIntro(){
+  const pickN = Math.min(PICK_COUNT, selected.size);
+  const groupsHtml = GROUPS.map(function(g){
+    const chips = POOL.filter(function(p){ return p.no >= g.from && p.no <= g.to; }).map(function(p){
+      return '<button class="rchip'+(selected.has(p.no)?' on':'')+'" data-no="'+p.no+'">'+p.no+'</button>';
+    }).join('');
+    return '<div class="range-group">'+
+             '<div class="range-lbl">'+g.label+' · '+g.from+'~'+g.to+'번</div>'+
+             '<div class="chips-grid">'+chips+'</div>'+
+           '</div>';
+  }).join('');
+
+  app.innerHTML =
+  '<div class="card intro">'+
+    '<div class="top">'+
+      '<div class="emoji">🔍</div>'+
+      '<h1>'+esc(TITLE)+'</h1>'+
+      '<p class="sub">YBM(김은형) 중2 · 워크북 8 순서배열 · 랜덤 '+PICK_COUNT+'문항</p>'+
+    '</div>'+
+
+    '<div class="sec-title">📑 출제 범위 선택</div>'+
+    '<div class="quick">'+
+      '<button data-q="all">전체</button>'+
+      GROUPS.map(function(g, gi){ return '<button data-q="g'+gi+'">'+g.from+'~'+g.to+'</button>'; }).join('')+
+      '<button data-q="none">해제</button>'+
+    '</div>'+
+    groupsHtml+
+
+    '<div class="stat-row">'+
+      '<div class="stat"><div class="n">'+selected.size+'</div><div class="l">선택한 문항</div></div>'+
+      '<div class="stat"><div class="n">'+pickN+'</div><div class="l">랜덤 출제</div></div>'+
+    '</div>'+
+
+    '<div class="timer-info">'+
+      '<span class="ti-ico">⏱️</span>'+
+      '<div><div class="t-lbl">제한시간 적용</div>'+
+      '<div class="t-desc">배열할 단어 수 × '+SEC_PER_WORD+'초 (오답 시 점점 짧아짐)</div></div>'+
+    '</div>'+
+
+    '<button class="btn btn-primary start-btn" id="start-btn"'+(selected.size===0?' disabled':'')+'>시작하기</button>'+
+
+    '<div class="rule">'+
+      '· 한글 뜻을 보고 <b>빈칸에 들어갈 단어를 순서대로</b> 눌러요. 회색 글씨는 주어진 부분이에요.<br>'+
+      '· 보기에는 <b>다른 문항의 한 문장 단어</b>가 섞여 있어요. 잘못 누르면 <b>-'+WRONG_TAP_PENALTY+'초</b>.<br>'+
+      '· 다 채우고 <b>채점</b>을 눌러요. 시간이 다 되면 오답 처리되고, 다음 문항부터 <b>'+PENALTY_PER_WRONG+'초씩</b> 짧아져요.'+
+    '</div>'+
+  '</div>'+
+  '<div class="re-foot"><b>RE:</b> 리드림영어학원 · REDREAM ENGLISH</div>';
+
+  app.querySelectorAll('.rchip').forEach(function(el){
+    el.addEventListener('click', function(){
+      const n = +el.dataset.no;
+      if(selected.has(n)) selected.delete(n); else selected.add(n);
+      renderIntro();
+    });
+  });
+  app.querySelectorAll('.quick button').forEach(function(el){
+    el.addEventListener('click', function(){
+      const q = el.dataset.q;
+      selected.clear();
+      if(q === 'all') POOL.forEach(function(p){ selected.add(p.no); });
+      else if(q.charAt(0) === 'g'){
+        const g = GROUPS[+q.slice(1)];
+        POOL.forEach(function(p){ if(p.no >= g.from && p.no <= g.to) selected.add(p.no); });
+      }
+      renderIntro();
+    });
+  });
+  document.getElementById('start-btn').addEventListener('click', startQuiz);
+}
+
+/* ---------- 출제 ---------- */
+function startQuiz(){
+  if(selected.size === 0) return;
+  testRange = Array.from(selected).sort(function(a, b){ return a - b; });
+  const picked = POOL.filter(function(p){ return selected.has(p.no); });
+  // 랜덤으로 고른 뒤, 본문 흐름대로 번호 순서로 출제
+  const chosen = shuffle(picked).slice(0, Math.min(PICK_COUNT, picked.length))
+                   .sort(function(a, b){ return a.no - b.no; });
+
+  QUESTIONS = chosen.map(function(item){
+    const P = PARSED[item.no];
+    return { no:item.no, ko:item.ko, segs:P.segs, words:P.words, full:P.full };
+  });
+
+  idx = 0; results = []; wrongCount = 0;
+  screen = 'quiz';
+  loadQuestion();
+}
+
+// 보기: 정답 단어 + 다른 문항의 한 문장(괄호 묶음) 단어
+function buildBank(q){
+  let cands = ALL_CHUNKS.filter(function(c){ return c.no !== q.no && c.words.length >= DISTRACTOR_MIN_WORDS; });
+  if(!cands.length) cands = ALL_CHUNKS.filter(function(c){ return c.no !== q.no; });
+  let extra = [];
+  shuffle(cands).slice(0, DISTRACTOR_ITEMS).forEach(function(c){ extra = extra.concat(c.words); });
+  const room = Math.max(4, MAX_BANK - q.words.length);
+  extra = shuffle(extra).slice(0, room);
+  return shuffle(q.words.concat(extra));
+}
+
+function loadQuestion(){
+  const q = QUESTIONS[idx];
+  placed = [];
+  graded = false;
+  results[idx] = { correct:false, timeout:false, filled:0, total:q.words.length, taps:0 };
+  if(!q._bank) q._bank = buildBank(q);
+  bank = q._bank;
+  bankUsed = bank.map(function(){ return false; });
+  startTimer(q.words);
+  renderQuiz();
+}
+
+/* ---------- 풀이 화면 ---------- */
+function slotHtml(q, gi){
+  if(gi < placed.length) return '<span class="slot fill">'+esc(q.words[gi])+'</span>';
+  if(graded) return '<span class="slot miss">'+esc(q.words[gi])+'</span>';
+  return '<span class="slot'+(gi === placed.length ? ' cur' : '')+'"></span>';
+}
+// 주어진 부분 + 빈칸. 빈칸 바로 앞뒤 문장부호( . , ! ?” “ )는 빈칸과 한 덩어리로 묶어
+// 줄바꿈 때 문장부호만 다음 줄로 떨어지지 않게 한다
+function frameHtml(q){
+  const segs = q.segs;
+  const parts = segs.map(function(s, si){
+    if(s.t === undefined) return null;
+    let t = s.t, lead = '', tail = '';
+    if(si > 0 && segs[si-1].c){ lead = t.match(/^\S*/)[0]; t = t.slice(lead.length); }
+    if(si < segs.length-1 && segs[si+1].c){ tail = t.match(/\S*$/)[0]; t = t.slice(0, t.length - tail.length); }
+    return { lead:lead, mid:t, tail:tail };
+  });
+  return segs.map(function(s, si){
+    if(s.t !== undefined) return parts[si].mid ? '<span class="fx">'+esc(parts[si].mid)+'</span>' : '';
+    const pre  = (si > 0 && parts[si-1]) ? parts[si-1].tail : '';
+    const post = (si < segs.length-1 && parts[si+1]) ? parts[si+1].lead : '';
+    return s.c.map(function(gi, k){
+      const a = (k === 0 && pre) ? '<span class="fx">'+esc(pre)+'</span>' : '';
+      const z = (k === s.c.length-1 && post) ? '<span class="fx">'+esc(post)+'</span>' : '';
+      const html = slotHtml(q, gi);
+      return (a || z) ? '<span class="nb">'+a+html+z+'</span>' : html;
+    }).join(' ');
+  }).join('');
+}
+
+function renderQuiz(){
+  const q = QUESTIONS[idx];
+  const r = results[idx];
+  const pct = Math.round(idx / QUESTIONS.length * 100);
+
+  const frameCls = graded ? (r.correct ? ' ok' : ' ng') : '';
+  const bankHtml = bank.map(function(w, bi){
+    return '<button class="chip'+(bankUsed[bi]?' used':'')+'" data-bi="'+bi+'"'+(graded?' disabled':'')+'>'+esc(chipText(w))+'</button>';
+  }).join('');
+
+  let verdict = '';
+  if(graded){
+    if(r.timeout){
+      verdict = '<div class="verdict ng">⏰ 시간 초과! 빨간 칸이 채우지 못한 단어예요.</div>';
+    } else if(r.correct){
+      verdict = '<div class="verdict ok">✓ 정답입니다!'+(r.taps ? '<span class="v-sub">잘못 누름 '+r.taps+'번</span>' : '')+'</div>';
+    } else {
+      verdict = '<div class="verdict ng">✗ 다시 확인해 보세요.</div>';
+    }
+  }
+
+  const actions = !graded
+    ? '<button class="btn btn-ghost" id="reset-btn">지우기</button>'+
+      '<button class="btn btn-primary" id="grade-btn"'+(placed.length !== q.words.length ? ' disabled' : '')+'>채점</button>'
+    : '<button class="btn btn-primary" id="next-btn">'+(idx === QUESTIONS.length-1 ? '결과 보기' : '다음 문항 →')+'</button>';
+
+  const low = (timeLeft <= 5 && !graded);
+  const timerRow =
+    '<div class="timer-row">'+
+      '<div class="timer-wrap"><div class="timer-bar'+(low?' low':'')+'" id="timer-bar" style="width:'+(graded ? 100 : (timeTotal ? Math.max(0, timeLeft/timeTotal*100) : 100))+'%"></div></div>'+
+      '<div class="timer-val'+(low?' low':'')+'" id="timer-val">'+(graded ? '—' : Math.max(0, timeLeft)+'초')+'</div>'+
+    '</div>';
+
+  app.innerHTML =
+    '<div class="topbar">'+
+      '<div class="quiz-title">'+esc(TITLE)+'</div>'+
+      '<button class="exit-btn" id="exit-btn">나가기</button>'+
+    '</div>'+
+    '<div class="progress-wrap"><div class="progress-bar" style="width:'+pct+'%"></div></div>'+
+    '<div class="progress-meta"><span>'+(idx+1)+' / '+QUESTIONS.length+' 문항</span>'+
+      '<span>맞은 개수 '+results.filter(function(x){ return x && x.correct; }).length+'</span></div>'+
+    timerRow+
+    '<div class="card q-card">'+
+      '<div class="q-num"><span class="tbadge">본문</span> 워크북 '+q.no+'번</div>'+
+      '<div class="q-ko">'+esc(q.ko)+'</div>'+
+      '<div class="q-instr">한글 뜻에 맞게 빈칸에 들어갈 단어를 순서대로 누르세요.</div>'+
+      verdict+
+      '<div class="frame'+frameCls+'" id="zone">'+frameHtml(q)+'</div>'+
+      '<div class="bank'+(graded?' done':'')+'" id="bank">'+bankHtml+'</div>'+
+      '<div class="q-actions">'+actions+'</div>'+
+    '</div>'+
+    '<div class="re-foot"><b>RE:</b> 리드림영어학원 · REDREAM ENGLISH</div>';
+
+  attachEvents();
+}
+
+function attachEvents(){
+  const q = QUESTIONS[idx];
+
+  document.getElementById('exit-btn').addEventListener('click', function(){
+    if(confirm('테스트를 그만두고 처음으로 돌아갈까요?')){
+      stopTimer();
+      screen = 'intro'; render();
+    }
+  });
+
+  if(!graded){
+    document.querySelectorAll('#bank .chip:not(.used)').forEach(function(el){
+      el.addEventListener('click', function(){
+        if(graded) return;
+        const bi = +el.dataset.bi;
+        if(bankUsed[bi] || placed.length >= q.words.length) return;
+        // 지금 채울 자리의 정답 단어와 글자가 같으면 통과 (같은 단어가 여러 개여도 OK)
+        if(norm(bank[bi]) === norm(q.words[placed.length])){
+          bankUsed[bi] = true;
+          placed.push({ w:bank[bi], from:bi });
+          renderQuiz();
+        } else {
+          penalizeWrongTap(el);
+        }
+      });
+    });
+    const rb = document.getElementById('reset-btn');
+    if(rb) rb.addEventListener('click', function(){
+      placed = []; bankUsed = bank.map(function(){ return false; }); renderQuiz();
+    });
+    const gb = document.getElementById('grade-btn');
+    if(gb) gb.addEventListener('click', gradeArrange);
+  } else {
+    const nb = document.getElementById('next-btn');
+    if(nb) nb.addEventListener('click', nextQuestion);
+  }
+}
+
+function gradeArrange(){
+  const q = QUESTIONS[idx], r = results[idx];
+  if(graded || placed.length !== q.words.length) return;
+  stopTimer();
+  r.correct = placed.every(function(p, i){ return norm(p.w) === norm(q.words[i]); });
+  r.filled = placed.length;
+  if(!r.correct) wrongCount++;
+  graded = true;
+  renderQuiz();
+}
+
+function nextQuestion(){
+  stopTimer();
+  if(idx === QUESTIONS.length-1){ screen = 'result'; renderResult(); }
+  else { idx++; loadQuestion(); }
+}
+
+/* ---------- 결과 ---------- */
+function answerHtml(q){
+  return q.segs.map(function(s){
+    if(s.t !== undefined) return esc(s.t);
+    return '<b>'+esc(s.c.map(function(gi){ return q.words[gi]; }).join(' '))+'</b>';
+  }).join('');
+}
+
+function renderResult(){
+  const total = QUESTIONS.length;
+  const correct = results.filter(function(r){ return r && r.correct; }).length;
+  const pct = Math.round(correct / total * 100);
+  const taps = results.reduce(function(s, r){ return s + (r ? r.taps : 0); }, 0);
+  let emoji, cls;
+  if(pct === 100){ emoji = '🎉'; cls = 'pass'; }
+  else if(pct >= 60){ emoji = '👍'; cls = 'mid'; }
+  else { emoji = '💪'; cls = 'mid'; }
+
+  const review = QUESTIONS.map(function(q, i){
+    const r = results[i] || {};
+    const ok = r.correct;
+    let meta = '';
+    if(r.timeout) meta = '<div class="ri-meta">⏰ 시간 초과 · '+r.filled+' / '+r.total+'단어 채움'+(r.taps ? ' · 잘못 누름 '+r.taps+'번' : '')+'</div>';
+    else if(r.taps) meta = '<div class="ri-meta soft">잘못 누름 '+r.taps+'번</div>';
+    return '<div class="review-item" id="ri-'+i+'">'+
+      '<div class="ri-top">'+
+        '<span class="ri-mark '+(ok?'ok':'ng')+'">'+(ok ? '✓' : (r.timeout ? '⏰' : '✗'))+'</span>'+
+        '<span class="ri-ko"><span class="ri-no">'+q.no+'번</span>'+esc(q.ko)+'</span>'+
+      '</div>'+
+      '<div class="ri-ans">'+answerHtml(q)+'</div>'+
+      meta+
+    '</div>';
+  }).join('');
+
+  // 시험 범위 · 출제 문항 요약 (캡처 한 장으로 확인할 수 있게 점수 바로 아래)
+  const isAll = testRange.length === POOL.length;
+  const numChips = QUESTIONS.map(function(q, i){
+    const r = results[i] || {};
+    const mark = r.correct ? '✓' : (r.timeout ? '⏰' : '✗');
+    return '<button class="num-chip '+(r.correct ? 'ok' : 'ng')+'" data-i="'+i+'">'+q.no+'번 '+mark+'</button>';
+  }).join('');
+  const summary =
+    '<div class="sum-box">'+
+      '<div class="sum-row"><span class="sum-lbl">시험 범위</span>'+
+        '<span class="sum-val" id="sum-range">'+rangeText(testRange)+(isAll ? ' (전체)' : '')+
+        '<span class="sum-sub"> · '+testRange.length+'문항 중 '+total+'문항 출제</span></span></div>'+
+      '<div class="sum-row"><span class="sum-lbl">출제 문항</span>'+
+        '<span class="sum-val nums" id="sum-nums">'+numChips+'</span></div>'+
+    '</div>';
+
+  app.innerHTML =
+    '<div class="topbar"><div class="quiz-title">'+esc(TITLE)+'</div></div>'+
+    '<div class="card result">'+
+      '<div class="emoji">'+emoji+'</div>'+
+      '<div class="score '+cls+'">'+correct+' / '+total+'</div>'+
+      '<div class="pct">정답률 '+pct+'%'+(taps ? ' · 잘못 누름 총 '+taps+'번' : '')+'</div>'+
+      summary+
+      '<div class="review">'+review+'</div>'+
+      '<div class="row">'+
+        '<button class="btn btn-ghost" id="again-btn">다시 풀기</button>'+
+        '<button class="btn btn-primary" id="home-btn">범위 다시 선택</button>'+
+      '</div>'+
+    '</div>'+
+    '<div class="re-foot"><b>RE:</b> 리드림영어학원 · REDREAM ENGLISH</div>';
+
+  document.getElementById('again-btn').addEventListener('click', startQuiz);
+  document.getElementById('home-btn').addEventListener('click', function(){ screen = 'intro'; render(); });
+  // 번호를 누르면 해당 문항 리뷰로 이동
+  app.querySelectorAll('.num-chip').forEach(function(el){
+    el.addEventListener('click', function(){
+      const it = document.getElementById('ri-' + el.dataset.i);
+      if(!it) return;
+      it.scrollIntoView({ behavior:'smooth', block:'center' });
+      it.classList.remove('flash'); void it.offsetWidth; it.classList.add('flash');
+    });
+  });
+}
+
+/* 시작 */
+render();
+</script>
+</body>
+</html>
